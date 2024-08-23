@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://4xwl60eppmjh"]
+
+[ext_resource type="Script" path="res://addons/have_a_break/have_a_break.gd" id="1_vtu63"]
+
+[node name="Have a break" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vtu63")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 89.0
+grow_horizontal = 2
+current_tab = 0
+
+[node name="Timer" type="VBoxContainer" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="TimeLeftLabel" type="Label" parent="TabContainer/Timer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Time left : 00:00:00"
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="TabContainer/Timer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="StartButton" type="Button" parent="TabContainer/Timer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="PauseButton" type="Button" parent="TabContainer/Timer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pause"
+
+[node name="ResetButton" type="Button" parent="TabContainer/Timer/ButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset"
+
+[node name="Settings" type="VBoxContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="SpinBox" type="SpinBox" parent="TabContainer/Settings"]
+layout_mode = 2
+
+[node name="SoundCheckBox" type="CheckBox" parent="TabContainer/Settings"]
+layout_mode = 2
+
+[node name="BreakTimePopup" type="PopupPanel" parent="."]
+unique_name_in_owner = true
+borderless = false
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3600.0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="TabContainer/Timer/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
