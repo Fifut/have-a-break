@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oo5r5lubxdep"
-path="res://.godot/imported/icon.png-43a6e44349f3cba4404c1b2f96ce1c90.ctex"
+uid="uid://ctck2vf56uyus"
+path="res://.godot/imported/food_beverage.svg-597278248236717c3c5567b380ada953.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/project-time-tracker/icon.png"
-dest_files=["res://.godot/imported/icon.png-43a6e44349f3cba4404c1b2f96ce1c90.ctex"]
+source_file="res://addons/have_a_break/image/food_beverage.svg"
+dest_files=["res://.godot/imported/food_beverage.svg-597278248236717c3c5567b380ada953.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=4.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

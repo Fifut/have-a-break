@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://4xwl60eppmjh"]
+[gd_scene load_steps=4 format=3 uid="uid://4xwl60eppmjh"]
 
 [ext_resource type="Script" path="res://addons/have_a_break/have_a_break.gd" id="1_vtu63"]
+[ext_resource type="AudioStream" uid="uid://b33s06ggox0u4" path="res://addons/have_a_break/sound/alarm.wav" id="2_1djqn"]
+[ext_resource type="Texture2D" uid="uid://ctck2vf56uyus" path="res://addons/have_a_break/image/food_beverage.svg" id="2_tfwpo"]
 
 [node name="Have a break" type="Control"]
 layout_mode = 3
@@ -26,23 +28,27 @@ metadata/_tab_index = 0
 [node name="TimeLeftLabel" type="Label" parent="TabContainer/Timer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Time left : 00:00:00"
+text = "Time left: 01:00:00"
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="TabContainer/Timer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="StartButton" type="Button" parent="TabContainer/Timer/ButtonsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Start"
 
 [node name="PauseButton" type="Button" parent="TabContainer/Timer/ButtonsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 text = "Pause"
 
 [node name="ResetButton" type="Button" parent="TabContainer/Timer/ButtonsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Reset"
@@ -53,14 +59,51 @@ layout_mode = 2
 metadata/_tab_index = 1
 
 [node name="SpinBox" type="SpinBox" parent="TabContainer/Settings"]
+visible = false
 layout_mode = 2
 
 [node name="SoundCheckBox" type="CheckBox" parent="TabContainer/Settings"]
+unique_name_in_owner = true
 layout_mode = 2
+button_pressed = true
+text = "Play sound"
 
 [node name="BreakTimePopup" type="PopupPanel" parent="."]
 unique_name_in_owner = true
+initial_position = 2
+size = Vector2i(300, 262)
+visible = true
 borderless = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BreakTimePopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BreakLabel" type="Label" parent="BreakTimePopup/VBoxContainer"]
+layout_mode = 2
+text = "Time to take a break"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CoffeTextureRect" type="TextureRect" parent="BreakTimePopup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_tfwpo")
+stretch_mode = 3
+
+[node name="StopButton" type="Button" parent="BreakTimePopup/VBoxContainer"]
+layout_mode = 2
+text = "Stop"
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -69,6 +112,10 @@ one_shot = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = ExtResource("2_1djqn")
 
 [connection signal="pressed" from="TabContainer/Timer/ButtonsContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="TabContainer/Timer/ButtonsContainer/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="TabContainer/Timer/ButtonsContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="BreakTimePopup/VBoxContainer/StopButton" to="." method="_on_stop_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

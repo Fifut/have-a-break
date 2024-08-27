@@ -11,4 +11,4 @@ func _enter_tree():
 
 func _exit_tree():
 	remove_control_from_docks(_dock_instance)
-	_dock_instance.queue_free()
+	_dock_instance.free()
